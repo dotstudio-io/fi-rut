@@ -1,3 +1,13 @@
+/**
+ * fiRut
+ *
+ * @description Chilean RUT utils for Node.js, the browser and AngularJS.
+ * @module fiRut
+ * @author Final Development Studio
+ * @license MIT
+ */
+
+
 'use strict';
 
 var GROUP_REGEX = /(\d)(?=(\d{3})+\b)/g;
@@ -9,13 +19,23 @@ var DASH = '-';
 var K = 'k';
 
 /**
- * Clean a string out of invalid RUT characters.
+ * @module rut
+ *
+ * @description This module is exposed as `window.rut` in browser and
+ * AngularJS versions. In Node.js require it as `fi-rut`.
+ */
+
+/**
+ * Cleans a string out of invalid RUT characters.
  *
  * @param {String} value The value to clean.
  * @param {Boolean} parts If the function should return an array of parts
  * instead of the concatenated string.
  *
- * @returns {String} The cleaned string.
+ * @returns {Mixed} The clean string or a String Array of parts
+ * if requested.
+ *
+ * @example rut.clean('7hf23775lwk052dgfdm1'); // '7237750521'
  */
 function clean(value, parts) {
   /* Ensure value is a string and keep only numbers and 'k' or 'K' */
@@ -42,6 +62,8 @@ function clean(value, parts) {
  * @param {String} value The value to format.
  *
  * @returns {String} The formatted string.
+ *
+ * @example rut.format('16992239k'); // '16.992.239-k'
  */
 function format(value) {
   value = clean(value);
@@ -65,6 +87,8 @@ function format(value) {
  * @param {String} value The string to validate.
  *
  * @returns {Boolean} If the string is a valid RUT number.
+ *
+ * @example rut.validate('24965101k'); // true
  */
 function validate(value) {
   /* Check if there's a value to validate */
@@ -103,6 +127,8 @@ function validate(value) {
  * @param {Mixed} value The value to obtain the digits from.
  *
  * @returns {String} The digits if any.
+ *
+ * @example rut.digits('14.602.789-k'); // '14602789'
  */
 function digits(value) {
   return clean(value, true)[0];
@@ -114,6 +140,8 @@ function digits(value) {
  * @param {Mixed} value The value to obtain the verifier from.
  *
  * @returns {String} The verifier if any.
+ *
+ * @example rut.digits('14.602.789-k'); // 'k'
  */
 function verifier(value) {
   return clean(value, true)[1];

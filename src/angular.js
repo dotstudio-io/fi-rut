@@ -1,3 +1,12 @@
+/**
+ * fiRut
+ *
+ * @description Chilean RUT utils for Node.js, the browser and AngularJS.
+ * @module fiRut
+ * @author Final Development Studio
+ * @license MIT
+ */
+
 (function (window) {
   'use strict';
 
@@ -22,7 +31,16 @@
   var RUT = 'rut';
 
   /**
+   * @module ngRut
+   *
+   * @description This module is exposed as `window.rut` in browser and
+   * AngularJS versions. In Node.js require it as `fi-rut`.
+   */
+
+  /**
    * ngRut service factory function.
+   *
+   * @private
    */
   function ngRutFactoryFn() {
     return rut;
@@ -30,6 +48,8 @@
 
   /**
    * ngRut directive function.
+   *
+   * @private
    */
   function ngRutDirectiveFn($log) {
 
@@ -48,6 +68,8 @@
 
       /**
        * ngRut input model formatter.
+       *
+       * @private
        */
       function ngRutDirectiveModelFormatter(value) {
         $model.$setValidity(RUT, validate(value));
@@ -57,6 +79,8 @@
 
       /**
        * ngRut input model parser.
+       *
+       * @private
        */
       function ngRutDirectiveModelParser(value) {
         $model.$setValidity(RUT, validate(value));
@@ -90,6 +114,8 @@
 
   /**
    * ngRut filter return function.
+   *
+   * @private
    */
   function ngRutFilerReturnFn(value, action) {
     switch (action) {
@@ -112,21 +138,72 @@
 
   /**
    * ngRut filter function.
+   *
+   * @private
    */
   function ngRutFilterFn() {
     return ngRutFilerReturnFn;
   }
 
-  /* Define the Angular module */
+  /**
+   * ngRut AngularJS module.
+   *
+   * Provides RUT service, directive and filter.
+   *
+   * @example angular.module('MyApp', ['ngRut']);
+   */
   ng.module(NG_RUT, [])
 
-  /* Create the service */
+  /**
+   * ngRut AngularJS service.
+   *
+   * The service passes the global `window.rut` methods to be used as a service
+   * inside an AngularJS controller, service or directive.
+   *
+   * @module Service
+   *
+   * @example angular.controller('MyController', ['ngRut', function (ngRut) {
+   *   ngRut.validate('...');
+   *   ngRut.verifier('...');
+   *   ngRut.format('...');
+   *   ngRut.digits('...');
+   *   ngRut.clean('...');
+   * }]);
+   */
   .factory(NG_RUT, ngRutFactoryFn)
 
-  /* Create the directive */
+  /**
+   * ngRut AngularJS directive.
+   *
+   * Provides RUT validation and formatting to an `input` element.
+   *
+   * **Example:**
+   *
+   * ```html
+   * <input ng-rut ng-model='rut'>
+   * ```
+   *
+   * @module Directive
+   */
   .directive(NG_RUT, ['$log', ngRutDirectiveFn])
 
-  /* Create the filter */
+  /**
+   * ngRut AngularJS filter.
+   *
+   * Provides all methods for interpolation filtering. Default is `format`.
+   *
+   * **Example:**
+   *
+   * ```text
+   * {{ rut | ngRut }}
+   * {{ rut | ngRut : 'validate' }}
+   * {{ rut | ngRut : 'verifier' }}
+   * {{ rut | ngRut : 'digits' }}
+   * {{ rut | ngRut : 'clean' }}
+   * ```
+   *
+   * @module Filter
+   */
   .filter(NG_RUT, ngRutFilterFn);
 
 }(window));
