@@ -42,7 +42,7 @@ bower install --save fi-rut
 Just require `fi-is`.
 
 ```javascript
-const rut = require('fi-is');
+const rut = require('fi-rut');
 ```
 
 ### Documentation
