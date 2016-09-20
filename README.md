@@ -1,4 +1,4 @@
-# fi-rut
+# fi-rut [![Build Status](https://travis-ci.org/FinalDevStudio/fi-rut.svg?branch=master)](https://travis-ci.org/FinalDevStudio/fi-rut)
 
 Chilean RUT utils for Node.js, the browser and AngularJS.
 
