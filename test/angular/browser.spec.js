@@ -1,9 +1,9 @@
 'use strict';
 
-const rut = require('../../lib');
 
 /* Test the filter */
-describe('The fi-rut module', function () {
+describe('The fi-rut browser module', function () {
+  var rut = window.rut;
 
   it('Exposes functions', function () {
     expect(rut.validate).to.be.a('function');

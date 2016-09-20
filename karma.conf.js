@@ -12,7 +12,13 @@ module.exports = function (config) {
     frameworks: ['mocha', 'chai'],
 
     // list of files / patterns to load in the browser
-    files: ['dist/fi-rut.min.js', 'test/*.js'],
+    files: [
+      'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js',
+      'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-mocks.js',
+
+      'dist/fi-rut-ng.js',
+      'test/angular/*.spec.js'
+    ],
 
     // list of files to exclude
     exclude: ['test/node.js'],
@@ -24,7 +30,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['mocha'],
 
     // web server port
     port: 9876,
