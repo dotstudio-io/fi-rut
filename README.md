@@ -22,7 +22,7 @@ With both versions the module will be assigned as `rut` into the `window` so you
 
 #### Important for AngularJS
 
-The module, filter, directive and service are called `ngRut` not `fi-rut` to maintain compatibility with the deprecated [ngRut](https://github.com/FinalDevStudio/ng-rut) module.
+The module, filter, directive and service are called `ngRut` (not `fi-rut`) to maintain compatibility with the deprecated [ngRut](https://github.com/FinalDevStudio/ng-rut) module.
 
 ### Documentation
 Read the [library docs](docs/lib.md) for the methods specification.
@@ -39,10 +39,10 @@ bower install --save fi-rut
 
 ### Usage
 
-Just require `fi-is`.
+Just require `fi-rut`.
 
 ```javascript
-const rut = require('fi-is');
+const rut = require('fi-rut');
 ```
 
 ### Documentation
