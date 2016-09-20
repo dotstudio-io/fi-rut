@@ -1,0 +1,7 @@
+dist
+src
+test
+**/.*
+bower.json
+karma.conf.js
+gulpfile.js
