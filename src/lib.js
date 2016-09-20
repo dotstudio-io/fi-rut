@@ -141,7 +141,7 @@ function digits(value) {
  *
  * @returns {String} The verifier if any.
  *
- * @example rut.digits('14.602.789-k'); // 'k'
+ * @example rut.verifier('14.602.789-k'); // 'k'
  */
 function verifier(value) {
   return clean(value, true)[1];

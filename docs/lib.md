@@ -96,7 +96,7 @@ Get the RUT verifier only.
 
 **Example**:
 ```js
-rut.digits('14.602.789-k'); // 'k'
+rut.verifier('14.602.789-k'); // 'k'
 ```
 
 
