@@ -1,2 +1,2 @@
 # fi-rut
-Chilian RUT utils for Node.js
+Chilean RUT utils for Node.js
