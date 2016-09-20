@@ -1,14 +1,24 @@
-# Global
+# fiRut
 
-
+Chilean RUT utils for Node.js, the browser and AngularJS.
 
 
 
 * * *
 
-### clean(value, parts) 
 
-Clean a string out of invalid RUT characters.
+# rut
+
+This module is exposed as `window.rut` in browser and
+AngularJS versions. In Node.js require it as `fi-rut`.
+
+
+
+* * *
+
+### rut.clean(value, parts) 
+
+Cleans a string out of invalid RUT characters.
 
 **Parameters**
 
@@ -17,10 +27,16 @@ Clean a string out of invalid RUT characters.
 **parts**: `Boolean`, If the function should return an array of parts
 instead of the concatenated string.
 
-**Returns**: `String`, The cleaned string.
+**Returns**: `Mixed`, The clean string or a String Array of parts
+if requested.
+
+**Example**:
+```js
+rut.clean('7hf23775lwk052dgfdm1'); // '7237750521'
+```
 
 
-### format(value) 
+### rut.format(value) 
 
 Formats a string as a RUT number.
 
@@ -30,8 +46,13 @@ Formats a string as a RUT number.
 
 **Returns**: `String`, The formatted string.
 
+**Example**:
+```js
+rut.format('16992239k'); // '16.992.239-k'
+```
 
-### validate(value) 
+
+### rut.validate(value) 
 
 Validates a string for a valid RUT number.
 
@@ -40,6 +61,43 @@ Validates a string for a valid RUT number.
 **value**: `String`, The string to validate.
 
 **Returns**: `Boolean`, If the string is a valid RUT number.
+
+**Example**:
+```js
+rut.validate('24965101k'); // true
+```
+
+
+### rut.digits(value) 
+
+Get the RUT digits only.
+
+**Parameters**
+
+**value**: `Mixed`, The value to obtain the digits from.
+
+**Returns**: `String`, The digits if any.
+
+**Example**:
+```js
+rut.digits('14.602.789-k'); // '14602789'
+```
+
+
+### rut.verifier(value) 
+
+Get the RUT verifier only.
+
+**Parameters**
+
+**value**: `Mixed`, The value to obtain the verifier from.
+
+**Returns**: `String`, The verifier if any.
+
+**Example**:
+```js
+rut.digits('14.602.789-k'); // 'k'
+```
 
 
 

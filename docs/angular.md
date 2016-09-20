@@ -1,46 +1,81 @@
-# Global
+# fiRut
 
-
+Chilean RUT utils for Node.js, the browser and AngularJS.
 
 
 
 * * *
 
-### ngRutFactoryFn() 
 
-ngRut service factory function.
+# ngRut
 
-
-
-### ngRutDirectiveFn() 
-
-ngRut directive function.
+This module is exposed as `window.rut` in browser and
+AngularJS versions. In Node.js require it as `fi-rut`.
 
 
 
-### ngRutDirectiveModelFormatter() 
-
-ngRut input model formatter.
+* * *
 
 
+# Service
 
-### ngRutDirectiveModelParser() 
+ngRut AngularJS service.
 
-ngRut input model parser.
-
-
-
-### ngRutFilerReturnFn() 
-
-ngRut filter return function.
+The service passes the global `window.rut` methods to be used as a service
+inside an AngularJS controller, service or directive.
 
 
 
-### ngRutFilterFn() 
+**Example:**
+```js
+angular.controller('MyController', ['ngRut', function (ngRut) {
+  ngRut.validate('...');
+  ngRut.verifier('...');
+  ngRut.format('...');
+  ngRut.digits('...');
+  ngRut.clean('...');
+}]);
+```
 
-ngRut filter function.
+* * *
 
 
+# Directive
+
+ngRut AngularJS directive.
+
+Provides RUT validation and formatting to an `input` element.
+
+**Example:**
+
+```html
+<input ng-rut ng-model='rut'>
+```
+
+
+
+* * *
+
+
+# Filter
+
+ngRut AngularJS filter.
+
+Provides all methods for interpolation filtering. Default is `format`.
+
+**Example:**
+
+```text
+{{ rut | ngRut }}
+{{ rut | ngRut : 'validate' }}
+{{ rut | ngRut : 'verifier' }}
+{{ rut | ngRut : 'digits' }}
+{{ rut | ngRut : 'clean' }}
+```
+
+
+
+* * *
 
 
 * * *
