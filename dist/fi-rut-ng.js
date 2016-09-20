@@ -89,8 +89,16 @@
                 }
                 return verifier === K;
             }
+            function digits(value) {
+                return clean(value, true)[0];
+            }
+            function verifier(value) {
+                return clean(value, true)[1];
+            }
             module.exports = {
                 validate: validate,
+                verifier: verifier,
+                digits: digits,
                 format: format,
                 clean: clean
             };
@@ -103,11 +111,15 @@
     var ng = window.angular;
     var rut = window.rut;
     var validate = rut.validate;
+    var verifier = rut.verifier;
+    var digits = rut.digits;
     var format = rut.format;
     var clean = rut.clean;
     var ERR_WRONG_ELEMENT = "This directive must be used on <INPUT> elements only and element is <%s>";
     var ERR_NO_MODEL = "A model should be assigned to the input element!";
     var VALIDATE = "validate";
+    var VERIFIER = "verifier";
+    var DIGITS = "digits";
     var CLEAN = "clean";
     var NG_RUT = "ngRut";
     var INPUT = "INPUT";
@@ -152,6 +164,12 @@
 
           case CLEAN:
             return clean(value);
+
+          case DIGITS:
+            return digits(value);
+
+          case VERIFIER:
+            return verifier(value);
 
           default:
             return format(value);

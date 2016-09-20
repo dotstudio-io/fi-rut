@@ -97,8 +97,32 @@ function validate(value) {
   return verifier === K;
 }
 
+/**
+ * Get the RUT digits only.
+ *
+ * @param {Mixed} value The value to obtain the digits from.
+ *
+ * @returns {String} The digits if any.
+ */
+function digits(value) {
+  return clean(value, true)[0];
+}
+
+/**
+ * Get the RUT verifier only.
+ *
+ * @param {Mixed} value The value to obtain the verifier from.
+ *
+ * @returns {String} The verifier if any.
+ */
+function verifier(value) {
+  return clean(value, true)[1];
+}
+
 module.exports = {
   validate: validate,
+  verifier: verifier,
+  digits: digits,
   format: format,
   clean: clean
 };
