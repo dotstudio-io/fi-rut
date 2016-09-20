@@ -1,6 +1,8 @@
+bower_components
 dist
 src
 test
+docs
 **/.*
 bower.json
 karma.conf.js
