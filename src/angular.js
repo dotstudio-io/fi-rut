@@ -13,6 +13,7 @@
   var ng = window.angular;
   var rut = window.rut;
 
+  var calculate = rut.calculate;
   var validate = rut.validate;
   var verifier = rut.verifier;
   var digits = rut.digits;
@@ -22,6 +23,7 @@
   var ERR_WRONG_ELEMENT = 'This directive must be used on <INPUT> elements only and element is <%s>';
   var ERR_NO_MODEL = 'A model should be assigned to the input element!';
 
+  var CALCULATE = 'calculate';
   var VALIDATE = 'validate';
   var VERIFIER = 'verifier';
   var DIGITS = 'digits';
@@ -117,19 +119,22 @@
    *
    * @private
    */
-  function ngRutFilerReturnFn(value, action) {
-    switch (action) {
+  function ngRutFilerReturnFn(value, method) {
+    switch (method) {
+    case CALCULATE:
+      return calculate(value);
+
+    case VERIFIER:
+      return verifier(value);
+
     case VALIDATE:
       return validate(value);
-
-    case CLEAN:
-      return clean(value);
 
     case DIGITS:
       return digits(value);
 
-    case VERIFIER:
-      return verifier(value);
+    case CLEAN:
+      return clean(value);
 
     default:
       return format(value);
@@ -163,6 +168,7 @@
    * @module Service
    *
    * @example angular.controller('MyController', ['ngRut', function (ngRut) {
+   *   ngRut.calculate('...');
    *   ngRut.validate('...');
    *   ngRut.verifier('...');
    *   ngRut.format('...');
@@ -196,6 +202,7 @@
    *
    * ```text
    * {{ rut | ngRut }}
+   * {{ rut | ngRut : 'calculate' }}
    * {{ rut | ngRut : 'validate' }}
    * {{ rut | ngRut : 'verifier' }}
    * {{ rut | ngRut : 'digits' }}

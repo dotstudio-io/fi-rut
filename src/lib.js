@@ -7,7 +7,6 @@
  * @license MIT
  */
 
-
 'use strict';
 
 var GROUP_REGEX = /(\d)(?=(\d{3})+\b)/g;
@@ -41,7 +40,7 @@ function clean(value, parts) {
   /* Ensure value is a string and keep only numbers and 'k' or 'K' */
   value = String(value).replace(CLEAN_REGEX, EMPTY);
 
-  /* Obtain the verifier digit */
+  /* Obtain the verifier */
   var verifier = value.substr(-1, 1);
 
   /* Obtain the RUT digits and keep only numbers */
@@ -82,6 +81,36 @@ function format(value) {
 }
 
 /**
+ * Calculates the RUT verifier.
+ *
+ * @param {String} digits The RUT digits to calculate the verifier from.
+ *
+ * @returns {String} The verifier.
+ *
+ * @example rut.calculate(16992239); // 'k'
+ * @example rut.calculate('24965101'); // 'k'
+ */
+function calculate(digits) {
+  digits = clean(digits);
+
+  /* Check if there's a value to validate */
+  if (!digits || !String(digits).length) {
+    return null;
+  }
+
+  var m = 0;
+  var r = 1;
+
+  /* Do the math :) */
+  for (; digits; digits = Math.floor(parseInt(digits) / 10)) {
+    r = (r + digits % 10 * (9 - m++ % 6)) % 11;
+  }
+
+  /* Return the calculated verifier of 'k' */
+  return r ? String(r - 1) : K;
+}
+
+/**
  * Validates a string for a valid RUT number.
  *
  * @param {String} value The string to validate.
@@ -93,32 +122,20 @@ function format(value) {
 function validate(value) {
   /* Check if there's a value to validate */
   if (!value || !String(value).length) {
-    return true;
+    return false;
   }
 
   var parts = clean(value, true);
   var verifier = parts[1];
   var digits = parts[0];
-  var m = 0;
-  var r = 1;
 
   /* If the verifier is not a number then it must be 'k' */
   if (isNaN(verifier)) {
     verifier = K;
   }
 
-  /* Do the math :) */
-  for (; digits; digits = Math.floor(parseInt(digits) / 10)) {
-    r = (r + digits % 10 * (9 - m++ % 6)) % 11;
-  }
-
-  /* Check if the RUT is valid against the result... */
-  if (r) {
-    return verifier === String(r - 1);
-  }
-
   /* ... or against 'K' */
-  return verifier === K;
+  return verifier === calculate(digits);
 }
 
 /**
@@ -148,6 +165,7 @@ function verifier(value) {
 }
 
 module.exports = {
+  calculate: calculate,
   validate: validate,
   verifier: verifier,
   digits: digits,
