@@ -87,8 +87,9 @@ function format(value) {
  *
  * @returns {String} The verifier.
  *
- * @example rut.calculate(16992239); // 'k'
- * @example rut.calculate('24965101'); // 'k'
+ * @example
+ * rut.calculate(16992239); // 'k'
+ * rut.calculate('24965101'); // 'k'
  */
 function calculate(digits) {
   digits = clean(digits);

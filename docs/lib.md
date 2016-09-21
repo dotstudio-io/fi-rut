@@ -64,12 +64,8 @@ Calculates the RUT verifier.
 
 **Example**:
 ```js
-rut.calculate(16992239); // 'k',rut.calculate('24965101'); // 'k'
-```
-
-**Example**:
-```js
-rut.calculate(16992239); // 'k',rut.calculate('24965101'); // 'k'
+rut.calculate(16992239); // 'k'
+rut.calculate('24965101'); // 'k'
 ```
 
 
