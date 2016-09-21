@@ -29,6 +29,7 @@ inside an AngularJS controller, service or directive.
 **Example:**
 ```js
 angular.controller('MyController', ['ngRut', function (ngRut) {
+  ngRut.calculate('...');
   ngRut.validate('...');
   ngRut.verifier('...');
   ngRut.format('...');
@@ -67,6 +68,7 @@ Provides all methods for interpolation filtering. Default is `format`.
 
 ```text
 {{ rut | ngRut }}
+{{ rut | ngRut : 'calculate' }}
 {{ rut | ngRut : 'validate' }}
 {{ rut | ngRut : 'verifier' }}
 {{ rut | ngRut : 'digits' }}

@@ -52,6 +52,27 @@ rut.format('16992239k'); // '16.992.239-k'
 ```
 
 
+### rut.calculate(digits) 
+
+Calculates the RUT verifier.
+
+**Parameters**
+
+**digits**: `String`, The RUT digits to calculate the verifier from.
+
+**Returns**: `String`, The verifier.
+
+**Example**:
+```js
+rut.calculate(16992239); // 'k',rut.calculate('24965101'); // 'k'
+```
+
+**Example**:
+```js
+rut.calculate(16992239); // 'k',rut.calculate('24965101'); // 'k'
+```
+
+
 ### rut.validate(value) 
 
 Validates a string for a valid RUT number.

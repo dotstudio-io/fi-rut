@@ -37,6 +37,10 @@ describe('The fi-rut\'s ngRut AngularJs filter', function () {
   it('Obtains RUT verifier only', function () {
     expect($filter('ngRut')(222222222, 'verifier')).to.equal('2');
   });
+
+  it('Calculates RUT verifier from digits', function () {
+    expect($filter('ngRut')(22222222, 'calculate')).to.equal('2');
+  });
 });
 
 /* Test the directive */
@@ -84,6 +88,7 @@ describe('The fi-rut\'s ngRut AngularJS service', function () {
   }));
 
   it('Exposes functions', function () {
+    expect($rut.calculate).to.be.a('function');
     expect($rut.validate).to.be.a('function');
     expect($rut.verifier).to.be.a('function');
     expect($rut.format).to.be.a('function');
@@ -138,6 +143,16 @@ describe('The fi-rut\'s ngRut AngularJS service', function () {
     expect($rut.verifier('150331404')).to.equal('4');
     expect($rut.verifier(165653548)).to.equal('8');
     expect($rut.verifier(225426570)).to.equal('0');
+  });
+
+  it('Calculates the verifier from RUT digits', function () {
+    expect($rut.calculate('7hf23775lwk052dgfdm')).to.equal('1');
+    expect($rut.calculate('14450447')).to.equal('k');
+    expect($rut.calculate('14.602.789-')).to.equal('k');
+    expect($rut.calculate('15033140')).to.equal('4');
+    expect($rut.calculate('16095761')).to.equal('1');
+    expect($rut.calculate(16565354)).to.equal('8');
+    expect($rut.calculate(22542657)).to.equal('0');
   });
 
 });

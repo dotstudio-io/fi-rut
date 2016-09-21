@@ -69,25 +69,29 @@
                 parts[0] = parts[0].replace(GROUP_REGEX, GROUP_REPLACE);
                 return parts.join(DASH);
             }
+            function calculate(digits) {
+                digits = clean(digits);
+                if (!digits || !String(digits).length) {
+                    return null;
+                }
+                var m = 0;
+                var r = 1;
+                for (;digits; digits = Math.floor(parseInt(digits) / 10)) {
+                    r = (r + digits % 10 * (9 - m++ % 6)) % 11;
+                }
+                return r ? String(r - 1) : K;
+            }
             function validate(value) {
                 if (!value || !String(value).length) {
-                    return true;
+                    return false;
                 }
                 var parts = clean(value, true);
                 var verifier = parts[1];
                 var digits = parts[0];
-                var m = 0;
-                var r = 1;
                 if (isNaN(verifier)) {
                     verifier = K;
                 }
-                for (;digits; digits = Math.floor(parseInt(digits) / 10)) {
-                    r = (r + digits % 10 * (9 - m++ % 6)) % 11;
-                }
-                if (r) {
-                    return verifier === String(r - 1);
-                }
-                return verifier === K;
+                return verifier === calculate(digits);
             }
             function digits(value) {
                 return clean(value, true)[0];
@@ -96,6 +100,7 @@
                 return clean(value, true)[1];
             }
             module.exports = {
+                calculate: calculate,
                 validate: validate,
                 verifier: verifier,
                 digits: digits,
