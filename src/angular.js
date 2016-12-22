@@ -56,8 +56,11 @@
   function ngRutDirectiveFn($log) {
 
     function ngRutDirectiveLinkFn($scope, $element, $attrs, $model) {
+      var input = $element[0];
+      var hasSetSelectionRange = 'setSelectionRange' in input;
+
       /* Check if $element is an input */
-      if ($element[0].tagName !== INPUT) {
+      if (input.tagName !== INPUT) {
         $log.error(ERR_WRONG_ELEMENT, $element[0].tagName);
         return;
       }
@@ -75,7 +78,6 @@
        */
       function ngRutDirectiveModelFormatter(value) {
         $model.$setValidity(RUT, validate(value));
-
         return format($model.$modelValue);
       }
 
@@ -85,18 +87,26 @@
        * @private
        */
       function ngRutDirectiveModelParser(value) {
-        $model.$setValidity(RUT, validate(value));
-        $model.$setViewValue(format(value));
+        var formatted = format(value);
+        var isValid = validate(value);
+        var len = formatted.length * 2;
+
+        $model.$setValidity(RUT, isValid);
+        $model.$setViewValue(formatted);
         $model.$render();
+
+        if (hasSetSelectionRange) {
+          setTimeout(input.setSelectionRange.bind(input, len, len));
+        }
 
         return clean(value);
       }
 
       /* Model formatter */
-      $model.$formatters.unshift(ngRutDirectiveModelFormatter);
+      $model.$formatters.push(ngRutDirectiveModelFormatter);
 
       /* Model parser */
-      $model.$parsers.unshift(ngRutDirectiveModelParser);
+      $model.$parsers.push(ngRutDirectiveModelParser);
     }
 
     /* ngRut directive definition */
