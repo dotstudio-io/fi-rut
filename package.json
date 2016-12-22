@@ -1,6 +1,6 @@
 {
   "name": "fi-rut",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Chilean RUT utils for Node.js and AngularJS",
   "main": "lib/index.js",
   "directories": {
