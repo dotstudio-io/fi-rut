@@ -34,7 +34,7 @@ Read the [AngularJS docs](docs/angular.md) for usage and specification on the mo
 ### Installation
 
 ```sh
-bower install --save fi-rut
+npm install --save fi-rut
 ```
 
 ### Usage
