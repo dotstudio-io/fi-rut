@@ -136,7 +136,9 @@
     }
     function ngRutDirectiveFn($log) {
         function ngRutDirectiveLinkFn($scope, $element, $attrs, $model) {
-            if ($element[0].tagName !== INPUT) {
+            var input = $element[0];
+            var hasSetSelectionRange = "setSelectionRange" in input;
+            if (input.tagName !== INPUT) {
                 $log.error(ERR_WRONG_ELEMENT, $element[0].tagName);
                 return;
             }
@@ -149,13 +151,19 @@
                 return format($model.$modelValue);
             }
             function ngRutDirectiveModelParser(value) {
-                $model.$setValidity(RUT, validate(value));
-                $model.$setViewValue(format(value));
+                var formatted = format(value);
+                var isValid = validate(value);
+                var len = formatted.length * 2;
+                $model.$setValidity(RUT, isValid);
+                $model.$setViewValue(formatted);
                 $model.$render();
+                if (hasSetSelectionRange) {
+                    setTimeout(input.setSelectionRange.bind(input, len, len));
+                }
                 return clean(value);
             }
-            $model.$formatters.unshift(ngRutDirectiveModelFormatter);
-            $model.$parsers.unshift(ngRutDirectiveModelParser);
+            $model.$formatters.push(ngRutDirectiveModelFormatter);
+            $model.$parsers.push(ngRutDirectiveModelParser);
         }
         var ngRutDirectiveDef = {
             restrict: "A",
