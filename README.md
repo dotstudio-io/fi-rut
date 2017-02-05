@@ -116,7 +116,7 @@ function MyController($scope, ngRut) {
   var clean = ngRut.clean($scope.data.rut);
 }
 
-angular.controller('MyController', ['$scope', 'ngRut', MyController]);
+angular.module('MyApp').controller('MyController', ['$scope', 'ngRut', MyController]);
 ```
 
 ##### Filter
