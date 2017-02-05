@@ -35,6 +35,9 @@ if requested.
 rut.clean('7hf23775lwk052dgfdm1'); // '7237750521'
 ```
 
+```js
+rut.clean('7hf23775lwk052dgfdm1', true); // ['723775052', '1']
+```
 
 ### rut.format(value) 
 
