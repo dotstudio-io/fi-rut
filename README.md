@@ -2,7 +2,7 @@
 
 Chilean RUT utils for Node.js, the browser and AngularJS.
 
-## Browser and AngularJS
+## Browser
 
 ### Installation
 
@@ -14,19 +14,61 @@ bower install --save fi-rut
 
 Include the distributable versions into your scripts bundle or load them as scripts in your HTML.
 
-**IMPORTANT:** The AndularJS version (`fi-rut-ng`) includes both the browser and AngularJS modules.
+The library will be assigned as `rut` into the `window` so you can access its methods directly via `window.rut`.
 
 #### Development / Debugging
 
-For production use the non-minified versions of either one.
-
-Browser:
+For production use the non-minified version:
 
 ```html
 <script src="/bower_components/fi-rut/dist/fi-rut.js"></script>
 ```
 
-AngularJS:
+#### Production
+
+For production use the minified version:
+
+```html
+<script src="/bower_components/fi-rut/dist/fi-rut.min.js"></script>
+```
+
+#### Examples
+
+```javascript
+var input = document.querySelector('input#rut');
+
+var calculated = rut.calculate(input.value);
+var verififer = rut.verifier(input.value);
+var isValid = rut.validate(input.value);  
+var formatted = rut.format(input.value);
+var digits = rut.digits(input.value);
+var clean = rut.clean(input.value);
+```
+
+### Documentation
+
+Read the [library docs](docs/lib.md) for the library's methods specification.
+
+
+## AngularJS
+
+### Installation
+
+```sh
+bower install --save fi-rut
+```
+
+### Usage
+
+Include the distributable versions into your scripts bundle or load them as scripts in your HTML.
+
+This version includes both the browser and AngularJS modules. 
+
+The library will be assigned as `rut` into the `window` so you can access its methods directly via `window.rut`.
+
+#### Development / Debugging
+
+For development or easy debugging use the non-minified version:
 
 ```html
 <script src="/bower_components/fi-rut/dist/fi-rut-ng.js"></script>
@@ -34,20 +76,13 @@ AngularJS:
 
 #### Production
 
-For production use the minified versions of either one.
-
-Browser:
-
-```html
-<script src="/bower_components/fi-rut/dist/fi-rut.min.js"></script>
-```
-
-AngularJS:
+For production use the minified version:
 
 ```html
 <script src="/bower_components/fi-rut/dist/fi-rut-ng.min.js"></script>
 ```
-#### AngularJS Usage
+
+#### Examples
 
 Include the `ngRut` dependency into your app:
 
@@ -97,19 +132,15 @@ Use the `ngRut` filter to interpolate template strings:
 <p>{{ data.rut | ngRut : 'clean' }}</p>
 ```
 
-#### Important
-
-With both versions the module will be assigned as `rut` into the `window` so you can access its methods directly via `window.rut`.
-
-#### Important for AngularJS
+#### Note
 
 The module, filter, directive and service are called `ngRut` (not `fi-rut`) to maintain compatibility with the deprecated [ngRut](https://github.com/FinalDevStudio/ng-rut) module.
 
 ### Documentation
 
-Read the [library docs](docs/lib.md) for the methods specification.
+Read the [library docs](docs/lib.md) for the library's methods specification.
 
-Read the [AngularJS docs](docs/angular.md) for usage and specification on the modules.
+Read the [AngularJS docs](docs/angular.md) for usage and specification on the module, service, directive and filter.
 
 ## For Node.js
 
@@ -125,6 +156,21 @@ Just require `fi-rut`.
 
 ```javascript
 const rut = require('fi-rut');
+```
+
+### Examples
+
+```javascript
+const rut = require('fi-rut');
+
+var value = '22222222';
+
+var calculated = rut.calculate(value);
+var verififer = rut.verifier(value);
+var isValid = rut.validate(value);  
+var formatted = rut.format(value);
+var digits = rut.digits(value);
+var clean = rut.clean(value);
 ```
 
 ### Documentation
