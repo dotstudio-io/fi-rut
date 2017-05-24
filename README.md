@@ -16,6 +16,8 @@ Include the distributable versions into your scripts bundle or load them as scri
 
 The library will be assigned as `rut` into the `window` so you can access its methods directly via `window.rut`.
 
+**IMPORTANT:** Values will allways be converted to lower case to enforce consistency.
+
 #### Development / Debugging
 
 For production use the non-minified version:
@@ -39,7 +41,7 @@ var input = document.querySelector('input#rut');
 
 var calculated = rut.calculate(input.value);
 var verififer = rut.verifier(input.value);
-var isValid = rut.validate(input.value);  
+var isValid = rut.validate(input.value);
 var formatted = rut.format(input.value);
 var digits = rut.digits(input.value);
 var clean = rut.clean(input.value);
@@ -62,7 +64,7 @@ bower install --save fi-rut
 
 Include the distributable versions into your scripts bundle or load them as scripts in your HTML.
 
-This version includes both the browser and AngularJS modules. 
+This version includes both the browser and AngularJS modules.
 
 The library will be assigned as `rut` into the `window` so you can access its methods directly via `window.rut`.
 
@@ -110,7 +112,7 @@ Use the `ngRut` service to access the module's methods programatically:
 function MyController($scope, ngRut) {
   var calculated = ngRut.calculate($scope.data.rut);
   var verififer = ngRut.verifier($scope.data.rut);
-  var isValid = ngRut.validate($scope.data.rut);  
+  var isValid = ngRut.validate($scope.data.rut);
   var formatted = ngRut.format($scope.data.rut);
   var digits = ngRut.digits($scope.data.rut);
   var clean = ngRut.clean($scope.data.rut);
@@ -167,7 +169,7 @@ var value = '22222222';
 
 var calculated = rut.calculate(value);
 var verififer = rut.verifier(value);
-var isValid = rut.validate(value);  
+var isValid = rut.validate(value);
 var formatted = rut.format(value);
 var digits = rut.digits(value);
 var clean = rut.clean(value);
