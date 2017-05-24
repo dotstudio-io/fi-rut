@@ -38,13 +38,15 @@ var K = 'k';
  */
 function clean(value, parts) {
   /* Ensure value is a string and keep only numbers and 'k' or 'K' */
-  value = String(value).replace(CLEAN_REGEX, EMPTY);
+  value = (value + '').replace(CLEAN_REGEX, EMPTY);
 
   /* Obtain the verifier */
-  var verifier = value.substr(-1, 1);
+  var verifier = value.substr(-1, 1).toLowerCase();
 
   /* Obtain the RUT digits and keep only numbers */
-  var digits = value.substr(0, value.length - 1).replace(DIGITS_REGEX, EMPTY);
+  var digits = value.substr(0, value.length - 1)
+    .replace(DIGITS_REGEX, EMPTY)
+    .toLowerCase();
 
   /* Return array of parts... */
   if (parts) {
@@ -77,7 +79,7 @@ function format(value) {
   /* Group digits with dots */
   parts[0] = parts[0].replace(GROUP_REGEX, GROUP_REPLACE);
 
-  return parts.join(DASH);
+  return parts.join(DASH).toLowerCase();
 }
 
 /**
@@ -108,7 +110,7 @@ function calculate(digits) {
   }
 
   /* Return the calculated verifier of 'k' */
-  return r ? String(r - 1) : K;
+  return r ? ((r - 1) + '') : K;
 }
 
 /**
@@ -122,7 +124,7 @@ function calculate(digits) {
  */
 function validate(value) {
   /* Check if there's a value to validate */
-  if (!value || !String(value).length) {
+  if (!value || !(value + '').length) {
     return false;
   }
 
