@@ -72,4 +72,8 @@ describe('The fi-rut module', function () {
     expect(rut.calculate(22542657)).to.equal('0');
   });
 
+  it('Formats RUT to lower case', function () {
+    expect(rut.format('16.406.235-K')).to.equal('16.406.235-k');
+  });
+
 });

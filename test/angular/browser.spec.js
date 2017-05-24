@@ -1,6 +1,5 @@
 'use strict';
 
-
 /* Test the filter */
 describe('The fi-rut browser module', function () {
   var rut = window.rut;
@@ -60,6 +59,10 @@ describe('The fi-rut browser module', function () {
     expect(rut.verifier('150331404')).to.equal('4');
     expect(rut.verifier(165653548)).to.equal('8');
     expect(rut.verifier(225426570)).to.equal('0');
+  });
+
+  it('Formats RUT to lower case', function () {
+    expect(rut.format('16.406.235-K')).to.equal('16.406.235-k');
   });
 
 });
