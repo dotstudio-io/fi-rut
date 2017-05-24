@@ -52,9 +52,9 @@
             var DASH = "-";
             var K = "k";
             function clean(value, parts) {
-                value = String(value).replace(CLEAN_REGEX, EMPTY);
-                var verifier = value.substr(-1, 1);
-                var digits = value.substr(0, value.length - 1).replace(DIGITS_REGEX, EMPTY);
+                value = (value + "").replace(CLEAN_REGEX, EMPTY);
+                var verifier = value.substr(-1, 1).toLowerCase();
+                var digits = value.substr(0, value.length - 1).replace(DIGITS_REGEX, EMPTY).toLowerCase();
                 if (parts) {
                     return [ digits, verifier ];
                 }
@@ -67,7 +67,7 @@
                 }
                 var parts = clean(value, true);
                 parts[0] = parts[0].replace(GROUP_REGEX, GROUP_REPLACE);
-                return parts.join(DASH);
+                return parts.join(DASH).toLowerCase();
             }
             function calculate(digits) {
                 digits = clean(digits);
@@ -79,10 +79,10 @@
                 for (;digits; digits = Math.floor(parseInt(digits) / 10)) {
                     r = (r + digits % 10 * (9 - m++ % 6)) % 11;
                 }
-                return r ? String(r - 1) : K;
+                return r ? r - 1 + "" : K;
             }
             function validate(value) {
-                if (!value || !String(value).length) {
+                if (!value || !(value + "").length) {
                     return false;
                 }
                 var parts = clean(value, true);
