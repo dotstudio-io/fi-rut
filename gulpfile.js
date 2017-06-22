@@ -59,18 +59,18 @@ function browser(min) {
 
   return b.bundle()
 
-  .pipe(source('bundle.tmp.js'))
+    .pipe(source('bundle.tmp.js'))
 
-  .pipe(buffer())
+    .pipe(buffer())
 
-  .pipe(uglify(min ? UGLIFY_OPTS.MIN : UGLIFY_OPTS.DEV).on('error', gutil.log))
+    .pipe(uglify(min ? UGLIFY_OPTS.MIN : UGLIFY_OPTS.DEV).on('error', gutil.log))
 
-  .pipe(rename({
-    basename: 'fi-rut',
-    extname: min ? '.min.js' : '.js'
-  }))
+    .pipe(rename({
+      basename: 'fi-rut',
+      extname: min ? '.min.js' : '.js'
+    }))
 
-  .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist'));
 }
 
 /**
@@ -83,16 +83,16 @@ function browser(min) {
 function angular(min) {
   return gulp.src(SOURCES.ANGULAR)
 
-  .pipe(concat('bundle.tmp.js'))
+    .pipe(concat('bundle.tmp.js'))
 
-  .pipe(uglify(min ? UGLIFY_OPTS.MIN : UGLIFY_OPTS.DEV).on('error', gutil.log))
+    .pipe(uglify(min ? UGLIFY_OPTS.MIN : UGLIFY_OPTS.DEV).on('error', gutil.log))
 
-  .pipe(rename({
-    basename: 'fi-rut-ng',
-    extname: min ? '.min.js' : '.js'
-  }))
+    .pipe(rename({
+      basename: 'fi-rut-ng',
+      extname: min ? '.min.js' : '.js'
+    }))
 
-  .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist'));
 }
 
 /** Distributables */
@@ -104,15 +104,12 @@ gulp.task('cleanup', () => {
 
 gulp.task('node', () => {
   return gulp.src('src/lib.js')
-
-  .pipe(uglify(UGLIFY_OPTS.DEV).on('error', gutil.log))
-
-  .pipe(rename({
-    basename: 'index',
-    extname: '.js'
-  }))
-
-  .pipe(gulp.dest('lib'));
+    .pipe(uglify(UGLIFY_OPTS.DEV).on('error', gutil.log))
+    .pipe(rename({
+      basename: 'index',
+      extname: '.js'
+    }))
+    .pipe(gulp.dest('lib'));
 });
 
 gulp.task('browser:dev', browser.bind(null, false));
@@ -125,6 +122,10 @@ gulp.task('browser', ['angular:dev', 'angular:min']);
 
 gulp.task('docs', (done) => {
   return jsdox.generateForDir('./src', './docs', null, done);
+});
+
+gulp.task('watch', ['cleanup', 'node', 'browser'], () => {
+  gulp.watch('./src/**/*.js', ['cleanup', 'node', 'browser']);
 });
 
 gulp.task('default', ['cleanup', 'node', 'browser', 'docs']);
