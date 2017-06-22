@@ -53,9 +53,24 @@ describe('The fi-rut\'s ngRut AngularJS directive', function () {
     $scope = $injector.get('$rootScope');
     $compile = $injector.get('$compile');
 
-    var element = angular.element('<form name="form"><input ng-model="rut" name="rut" ng-rut required></form>');
+    var form = angular.element('<form />');
+    var ireq = angular.element('<input />');
+    var inrq = angular.element('<input />');
 
-    $compile(element)($scope);
+    ireq.attr('ng-model' , 'rut');
+    ireq.attr('name', 'rut');
+    ireq.attr('ng-rut', true);
+    ireq.attr('required', true);
+
+    inrq.attr('ng-model' , 'rut');
+    inrq.attr('name', 'nrut');
+    inrq.attr('ng-rut', true);
+
+    form.attr('name', 'form');
+    form.append(ireq);
+    form.append(inrq);
+
+    $compile(form)($scope);
   }));
 
   it('Validates and formats a valid RUT in the input element', function () {
@@ -64,7 +79,7 @@ describe('The fi-rut\'s ngRut AngularJS directive', function () {
     $scope.$digest();
 
     expect($scope.form.rut.$viewValue).to.equal('22.222.222-2');
-    expect($scope.form.$valid).to.be.true;
+    expect($scope.form.rut.$valid).to.be.true;
   });
 
   it('Validates and formats an invalid RUT in the input element', function () {
@@ -73,7 +88,25 @@ describe('The fi-rut\'s ngRut AngularJS directive', function () {
     $scope.$digest();
 
     expect($scope.form.rut.$viewValue).to.equal('22.222.222-8');
-    expect($scope.form.$invalid).to.be.true;
+    expect($scope.form.rut.$invalid).to.be.true;
+  });
+
+  it('Allows empty RUT in the input element without required attribute', function () {
+    $scope.rut = null;
+
+    $scope.$digest();
+
+    expect($scope.form.nrut.$viewValue).to.equal('');
+    expect($scope.form.nrut.$valid).to.be.true;
+  });
+
+  it('Doesn\'t allows empty RUT in the input element with required attribute', function () {
+    $scope.rut = null;
+
+    $scope.$digest();
+
+    expect($scope.form.rut.$viewValue).to.equal('');
+    expect($scope.form.rut.$invalid).to.be.true;
   });
 });
 
