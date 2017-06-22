@@ -20,18 +20,6 @@
   var format = rut.format;
   var clean = rut.clean;
 
-  var ERR_WRONG_ELEMENT = 'This directive must be used on <INPUT> elements only and element is <%s>';
-  var ERR_NO_MODEL = 'A model should be assigned to the input element!';
-
-  var CALCULATE = 'calculate';
-  var VALIDATE = 'validate';
-  var VERIFIER = 'verifier';
-  var DIGITS = 'digits';
-  var CLEAN = 'clean';
-  var NG_RUT = 'ngRut';
-  var INPUT = 'INPUT';
-  var RUT = 'rut';
-
   /**
    * @module ngRut
    *
@@ -60,15 +48,23 @@
       var hasSetSelectionRange = 'setSelectionRange' in input;
 
       /* Check if $element is an input */
-      if (input.tagName !== INPUT) {
-        $log.error(ERR_WRONG_ELEMENT, $element[0].tagName);
+      if (input.tagName !== 'INPUT') {
+        $log.error('This directive must be used on <INPUT> elements only and element is <%s>', $element[0].tagName);
         return;
       }
 
       /* Check if the $element has an associated model */
       if (!$model) {
-        $log.warn(ERR_NO_MODEL);
+        $log.warn('A model should be assigned to the input element!');
         return;
+      }
+
+      function setModelValidity(value) {
+        if (value || $attrs.hasOwnProperty('required')) {
+          $model.$setValidity('rut', validate(value));
+        } else { // Make valid if not required
+          $model.$setValidity('rut', true);
+        }
       }
 
       /**
@@ -77,7 +73,8 @@
        * @private
        */
       function ngRutDirectiveModelFormatter(value) {
-        $model.$setValidity(RUT, validate(value));
+        setModelValidity(value);
+
         return format($model.$modelValue);
       }
 
@@ -87,11 +84,11 @@
        * @private
        */
       function ngRutDirectiveModelParser(value) {
+        setModelValidity(value);
+
         var formatted = format(value);
-        var isValid = validate(value);
         var len = formatted.length * 2;
 
-        $model.$setValidity(RUT, isValid);
         $model.$setViewValue(formatted);
         $model.$render();
 
@@ -131,19 +128,19 @@
    */
   function ngRutFilerReturnFn(value, method) {
     switch (method) {
-    case CALCULATE:
+    case 'calculate':
       return calculate(value);
 
-    case VERIFIER:
+    case 'verifier':
       return verifier(value);
 
-    case VALIDATE:
+    case 'validate':
       return validate(value);
 
-    case DIGITS:
+    case 'digits':
       return digits(value);
 
-    case CLEAN:
+    case 'clean':
       return clean(value);
 
     default:
@@ -167,7 +164,7 @@
    *
    * @example angular.module('MyApp', ['ngRut']);
    */
-  ng.module(NG_RUT, [])
+  var mod = ng.module('ngRut', []);
 
   /**
    * ngRut AngularJS service.
@@ -186,7 +183,7 @@
    *   ngRut.clean('...');
    * }]);
    */
-  .factory(NG_RUT, ngRutFactoryFn)
+  mod.factory('ngRut', ngRutFactoryFn);
 
   /**
    * ngRut AngularJS directive.
@@ -201,7 +198,7 @@
    *
    * @module Directive
    */
-  .directive(NG_RUT, ['$log', ngRutDirectiveFn])
+  mod.directive('ngRut', ['$log', ngRutDirectiveFn]);
 
   /**
    * ngRut AngularJS filter.
@@ -221,6 +218,6 @@
    *
    * @module Filter
    */
-  .filter(NG_RUT, ngRutFilterFn);
+  mod.filter('ngRut', ngRutFilterFn);
 
 }(window));
