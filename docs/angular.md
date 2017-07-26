@@ -3,9 +3,6 @@
 Chilean RUT utils for Node.js, the browser and AngularJS.
 
 
-**Members:**
-
-+ mod
 
 * * *
 
@@ -16,9 +13,6 @@ This module is exposed as an AngularJS as 'ng-rut' as a
 directive, as 'ngRut' as a filter and as 'ngRut' as a service.
 
 
-**Members:**
-
-+ mod
 
 * * *
 
@@ -31,9 +25,6 @@ The service passes the global `window.rut` methods to be used as a service
 inside an AngularJS controller, service or directive.
 
 
-**Members:**
-
-+ mod
 
 **Example:**
 ```js
@@ -63,9 +54,6 @@ Provides RUT validation and formatting to an `input` element.
 ```
 
 
-**Members:**
-
-+ mod
 
 * * *
 
@@ -88,9 +76,6 @@ Provides all methods for interpolation filtering. Default is `format`.
 ```
 
 
-**Members:**
-
-+ mod
 
 * * *
 

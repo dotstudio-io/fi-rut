@@ -32,12 +32,11 @@ if requested.
 
 **Example**:
 ```js
-rut.clean('7hf23775lwk052dgfdm1'); // '7237750521',rut.clean('7hf23775lwk052dgfdm1', true); // ['723775052', '1']
-```
+// Returns '7237750521'
+rut.clean('7hf23775lwk052dgfdm1');
 
-**Example**:
-```js
-rut.clean('7hf23775lwk052dgfdm1'); // '7237750521',rut.clean('7hf23775lwk052dgfdm1', true); // ['723775052', '1']
+// Returns ['723775052', '1']
+rut.clean('7hf23775lwk052dgfdm1', true);
 ```
 
 
@@ -53,7 +52,8 @@ Formats a string as a RUT number.
 
 **Example**:
 ```js
-rut.format('16992239k'); // '16.992.239-k'
+// Returns '16.992.239-k'
+rut.format('16992239k');
 ```
 
 
@@ -69,8 +69,9 @@ Calculates the RUT verifier.
 
 **Example**:
 ```js
-rut.calculate(16992239); // 'k'
-rut.calculate('24965101'); // 'k'
+// Both return 'k'
+rut.calculate(16992239);
+rut.calculate('24965101');
 ```
 
 
@@ -86,7 +87,8 @@ Validates a string for a valid RUT number.
 
 **Example**:
 ```js
-rut.validate('24965101k'); // true
+// Returns true
+rut.validate('24965101k');
 ```
 
 
@@ -102,7 +104,8 @@ Get the RUT digits only.
 
 **Example**:
 ```js
-rut.digits('14.602.789-k'); // '14602789'
+// Returns '14602789'
+rut.digits('14.602.789-k');
 ```
 
 
@@ -118,7 +121,8 @@ Get the RUT verifier only.
 
 **Example**:
 ```js
-rut.verifier('14.602.789-k'); // 'k'
+// Returns 'k'
+rut.verifier('14.602.789-k');
 ```
 
 
