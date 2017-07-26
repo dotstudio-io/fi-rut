@@ -1,5 +1,5 @@
 /**
- * fiRut
+ * Fi Rut
  *
  * @description Chilean RUT utils for Node.js, the browser and AngularJS.
  * @module fiRut
@@ -31,10 +31,11 @@ var K = 'k';
  * @param {Boolean} parts If the function should return an array of parts
  * instead of the concatenated string.
  *
- * @returns {Mixed} The clean string or a String Array of parts
+ * @returns {String|Array} The clean string or a String Array of parts
  * if requested.
  *
  * @example rut.clean('7hf23775lwk052dgfdm1'); // '7237750521'
+ * @example rut.clean('7hf23775lwk052dgfdm1', true); // ['723775052', '1']
  */
 function clean(value, parts) {
   /* Ensure value is a string and keep only numbers and 'k' or 'K' */
@@ -53,7 +54,7 @@ function clean(value, parts) {
     return [digits, verifier];
   }
 
-  /* ... or return a string */
+  /* ... or return a single string */
   return digits + verifier;
 }
 
@@ -137,7 +138,6 @@ function validate(value) {
     verifier = K;
   }
 
-  /* ... or against 'K' */
   return verifier === calculate(digits);
 }
 
