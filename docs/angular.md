@@ -12,8 +12,8 @@ Chilean RUT utils for Node.js, the browser and AngularJS.
 
 # ngRut
 
-This module is exposed as `window.rut` in browser and
-AngularJS versions. In Node.js require it as `fi-rut`.
+This module is exposed as an AngularJS as 'ng-rut' as a
+directive, as 'ngRut' as a filter and as 'ngRut' as a service.
 
 
 **Members:**

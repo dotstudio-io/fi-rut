@@ -27,12 +27,17 @@ Cleans a string out of invalid RUT characters.
 **parts**: `Boolean`, If the function should return an array of parts
 instead of the concatenated string.
 
-**Returns**: `Mixed`, The clean string or a String Array of parts
+**Returns**: `String | Array`, The clean string or a String Array of parts
 if requested.
 
 **Example**:
 ```js
-rut.clean('7hf23775lwk052dgfdm1'); // '7237750521'
+rut.clean('7hf23775lwk052dgfdm1'); // '7237750521',rut.clean('7hf23775lwk052dgfdm1', true); // ['723775052', '1']
+```
+
+**Example**:
+```js
+rut.clean('7hf23775lwk052dgfdm1'); // '7237750521',rut.clean('7hf23775lwk052dgfdm1', true); // ['723775052', '1']
 ```
 
 
