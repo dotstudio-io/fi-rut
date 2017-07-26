@@ -28,7 +28,7 @@
   "homepage": "https://github.com/FinalDevStudio/fi-rut#readme",
   "devDependencies": {
     "browserify": "^14.4.0",
-    "chai": "^4.0.2",
+    "chai": "^4.1.0",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
