@@ -23,8 +23,8 @@
   /**
    * @module ngRut
    *
-   * @description This module is exposed as `window.rut` in browser and
-   * AngularJS versions. In Node.js require it as `fi-rut`.
+   * @description This module is exposed as an AngularJS as 'ng-rut' as a
+   * directive, as 'ngRut' as a filter and as 'ngRut' as a service.
    */
 
   /**
@@ -42,7 +42,11 @@
    * @private
    */
   function ngRutDirectiveFn($log) {
-
+    /**
+     * ngRut directive link function.
+     *
+     * @private
+     */
     function ngRutDirectiveLinkFn($scope, $element, $attrs, $model) {
       var input = $element[0];
       var hasSetSelectionRange = 'setSelectionRange' in input;
@@ -59,10 +63,16 @@
         return;
       }
 
+      /**
+       * ngRut input model parser.
+       *
+       * @private
+       */
       function setModelValidity(value) {
-        if (value || $attrs.hasOwnProperty('required')) {
+        if (value || input.hasAttribute('required')) {
           $model.$setValidity('rut', validate(value));
-        } else { // Make valid if not required
+        } else {
+          /* Make as valid if not required */
           $model.$setValidity('rut', true);
         }
       }
