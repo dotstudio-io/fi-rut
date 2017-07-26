@@ -192,8 +192,8 @@
     function ngRutFilterFn() {
         return ngRutFilerReturnFn;
     }
-    var mod = ng.module("ngRut", []);
-    mod.factory("ngRut", ngRutFactoryFn);
-    mod.directive("ngRut", [ "$log", ngRutDirectiveFn ]);
-    mod.filter("ngRut", ngRutFilterFn);
+    var fiRut = ng.module("ngRut", []);
+    fiRut.factory("ngRut", ngRutFactoryFn);
+    fiRut.directive("ngRut", [ "$log", ngRutDirectiveFn ]);
+    fiRut.filter("ngRut", ngRutFilterFn);
 })(window);
