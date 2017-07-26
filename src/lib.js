@@ -34,8 +34,12 @@ var K = 'k';
  * @returns {String|Array} The clean string or a String Array of parts
  * if requested.
  *
- * @example rut.clean('7hf23775lwk052dgfdm1'); // '7237750521'
- * @example rut.clean('7hf23775lwk052dgfdm1', true); // ['723775052', '1']
+ * @example
+ * // Returns '7237750521'
+ * rut.clean('7hf23775lwk052dgfdm1');
+ *
+ * // Returns ['723775052', '1']
+ * rut.clean('7hf23775lwk052dgfdm1', true);
  */
 function clean(value, parts) {
   /* Ensure value is a string and keep only numbers and 'k' or 'K' */
@@ -65,7 +69,9 @@ function clean(value, parts) {
  *
  * @returns {String} The formatted string.
  *
- * @example rut.format('16992239k'); // '16.992.239-k'
+ * @example
+ * // Returns '16.992.239-k'
+ * rut.format('16992239k');
  */
 function format(value) {
   value = clean(value);
@@ -91,8 +97,9 @@ function format(value) {
  * @returns {String} The verifier.
  *
  * @example
- * rut.calculate(16992239); // 'k'
- * rut.calculate('24965101'); // 'k'
+ * // Both return 'k'
+ * rut.calculate(16992239);
+ * rut.calculate('24965101');
  */
 function calculate(digits) {
   digits = clean(digits);
@@ -121,7 +128,9 @@ function calculate(digits) {
  *
  * @returns {Boolean} If the string is a valid RUT number.
  *
- * @example rut.validate('24965101k'); // true
+ * @example
+ * // Returns true
+ * rut.validate('24965101k');
  */
 function validate(value) {
   /* Check if there's a value to validate */
@@ -148,7 +157,9 @@ function validate(value) {
  *
  * @returns {String} The digits if any.
  *
- * @example rut.digits('14.602.789-k'); // '14602789'
+ * @example
+ * // Returns '14602789'
+ * rut.digits('14.602.789-k');
  */
 function digits(value) {
   return clean(value, true)[0];
@@ -161,7 +172,9 @@ function digits(value) {
  *
  * @returns {String} The verifier if any.
  *
- * @example rut.verifier('14.602.789-k'); // 'k'
+ * @example
+ * // Returns 'k'
+ * rut.verifier('14.602.789-k');
  */
 function verifier(value) {
   return clean(value, true)[1];

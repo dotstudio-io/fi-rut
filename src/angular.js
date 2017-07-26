@@ -174,7 +174,11 @@
    *
    * @example angular.module('MyApp', ['ngRut']);
    */
-  var mod = ng.module('ngRut', []);
+
+  /**
+   * @private
+   */
+  var fiRut = ng.module('ngRut', []);
 
   /**
    * ngRut AngularJS service.
@@ -193,7 +197,7 @@
    *   ngRut.clean('...');
    * }]);
    */
-  mod.factory('ngRut', ngRutFactoryFn);
+  fiRut.factory('ngRut', ngRutFactoryFn);
 
   /**
    * ngRut AngularJS directive.
@@ -208,7 +212,7 @@
    *
    * @module Directive
    */
-  mod.directive('ngRut', ['$log', ngRutDirectiveFn]);
+  fiRut.directive('ngRut', ['$log', ngRutDirectiveFn]);
 
   /**
    * ngRut AngularJS filter.
@@ -228,6 +232,6 @@
    *
    * @module Filter
    */
-  mod.filter('ngRut', ngRutFilterFn);
+  fiRut.filter('ngRut', ngRutFilterFn);
 
 }(window));
