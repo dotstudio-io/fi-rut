@@ -137,7 +137,7 @@
                 return;
             }
             function setModelValidity(value) {
-                if (value || $attrs.hasOwnProperty("required")) {
+                if (value || input.hasAttribute("required")) {
                     $model.$setValidity("rut", validate(value));
                 } else {
                     $model.$setValidity("rut", true);
